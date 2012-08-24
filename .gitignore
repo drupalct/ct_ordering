@@ -1,6 +1,17 @@
+# Ignore setting files generate by Eclipse
+.buildpath
+.project
+.settings
+
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
 
-# Ignore paths that contain user-generated content.
+# Ignore paths that contains user-generated content.
+sites/*/css
+sites/*/js
 sites/*/files
 sites/*/private
+cache/
+
+# Ignore dev folder that contains development modules.
+sites/*/modules/dev
