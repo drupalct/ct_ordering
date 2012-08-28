@@ -7,85 +7,113 @@ function ct_restaurant_menu() {
 		'type' => MENU_CALLBACK,
     'access callback' => TRUE,
 	);
+	$items['admin/restaurantConfig'] = array(
+    'title' => t('配置'),
+    'page callback' => 'drupal_get_form',
+		'page arguments' => array('restaurant_onfig_form'),
+		'type' => MENU_NORMAL_ITEM,
+    'access callback' => TRUE,
+	);
 	return $items;
 }
 
+function restaurant_onfig_form() {
+	$form['ordered_url_redirect'] = array(
+  	'#required' => true,
+    '#type' => 'textfield',
+    '#title' => t("下单后跳转地址"),
+		'#default_value' => variable_get("ordered_url_redirect", "<front>")
+	);
+	return system_settings_form($form);
+}
 function search_customer_by_phone() {
-	$query = new EntityFieldQuery();
-	$entities = $query->entityCondition('entity_type', 'node')
-		//->propertyCondition('title', 'Home Page Content')
+	if (validate_phone($_REQUEST['phone'])) {
+		$query = new EntityFieldQuery();
+		$entities = $query->entityCondition('entity_type', 'node')
 		->propertyCondition('type', 'ct_ordering_customer')
 		->propertyCondition('status', 0)
 		->fieldCondition('field_customer_phone', 'value', $_REQUEST['phone'], '=')
-		//->propertyCondition('language', $language->language)
 		->range(0, 1)
 		->execute();
-	
-	foreach ($entities['node'] as $key => $value) {
-		$node = node_load($key);
-		break;
+
+		foreach ($entities['node'] as $key => $value) {
+			$node = node_load($key);
+			break;
+		}
+		$node->field_customer_address['und'][0]['value'];
+		drupal_json_output(array("name" => $node->title, "adress" => $node->field_customer_address['und'][0]['value']));//return name and address
+		exit;
+	} else {
+		drupal_json_output(array("msg" => t('Invalidate phone number')));
 	}
-	//dsm($node);
-	$node->field_customer_address['und'][0]['value'];
-	//return "";
-	drupal_json_output(array("name" => $node->title, "adress" => $node->field_customer_address['und'][0]['value']));//return name and address
-	exit;
 }
 function ct_restaurant_block_info() {
-  $blocks['ct_restaurant_order_form'] = array(
+	$blocks['ct_restaurant_order_form'] = array(
     'info' => t('送餐信息表单区块'),
     'status' => TRUE,
     'region' => 'sidebar_first',  
     'visibility' => BLOCK_VISIBILITY_LISTED,  
     'pages' => 'node/*',
-  );
+	);
 
-  return $blocks;
+	return $blocks;
 }
 
 function ct_restaurant_block_view($delta = '') {
-  //The $delta parameter tells us which block is being requested.
-  switch ($delta) {
-    case 'ct_restaurant_order_form':
-      $block['subject'] = t('填写送餐信息');
-      $block['content'] = drupal_get_form('ct_restaurant_order_form');
-      break;
-  }
-  return $block;
+	//The $delta parameter tells us which block is being requested.
+	switch ($delta) {
+		case 'ct_restaurant_order_form':
+			$block['subject'] = t('填写送餐信息');
+			$block['content'] = drupal_get_form('ct_restaurant_order_form');
+			break;
+	}
+	return $block;
 }
-
 function ct_restaurant_order_form($form, &$form_state) {
 	drupal_add_js(drupal_get_path("module", "ct_restaurant") . '/jquery.cookie.js', array('type' => 'file', 'scope' => 'footer'));
-  $form['description'] = array(
+	$form['description'] = array(
     '#type' => 'item',
     '#title' => t('为保证您的餐点能够快速送达，请认真填写以下送餐信息，:D'),
-  );
-  $form['name'] = array(
+	);
+	$form['name'] = array(
+  	'#required' => true,
     '#type' => 'textfield',
     '#title' => t("姓名/称谓"),
-  );
-  $form['phone'] = array(
+	);
+	$form['phone'] = array(
+  	'#required' => true,
     '#type' => 'textfield',
     '#title' => t("联系电话"),
-  );
-  $form['address'] = array(
+	);
+	$form['address'] = array(
+  	'#required' => true,
     '#type' => 'textfield',
     '#title' => t("送餐地址"),
-  );
-  $form['notes'] = array(
+	);
+	$form['notes'] = array(
     '#type' => 'textarea',
     '#title' => t("说明"),
-  );
-  $form['submit'] = array(
+	);
+	$form['submit'] = array(
     '#type' => 'submit',
     '#value' => t("确认订餐"),
-  );
-  return $form;
+	);
+	return $form;
+}
+
+function ct_restaurant_order_form_validate($form, &$form_state) {
+	if (!isset($_COOKIE["order_info"]) && empty($_COOKIE["order_info"])) {
+		
+		form_set_error('', t('貌似你没有订餐，或者您的浏览器禁用了cookie，...o(╯□╰)o)'));
+	}
+	if (!validate_phone($form_state['values']['phone'])) {
+		form_set_error('phone', t('似乎不是正确的电话号码。。。'));
+	}
 }
 function ct_restaurant_order_form_submit($form, &$form_state) {
 	//订单相关
 	$notes = $form_state['values']['notes'];
-	
+
 	//客户相关
 	$address = $form_state['values']['address'];
 	$phone = $form_state['values']['phone'];
@@ -104,20 +132,20 @@ function ct_restaurant_order_form_submit($form, &$form_state) {
 	$node_customer->sticky = 0;
 	$node_customer->format = 2;
 	$node_customer->title = $name;
-	$node_customer->field_customer_address['und'][0]['value'] = $address; 
-	$node_customer->body['und'][0]['value'] = $notes; 
+	$node_customer->field_customer_address['und'][0]['value'] = $address;
+	$node_customer->body['und'][0]['value'] = $notes;
 	$node_customer->field_customer_phone['und'][0]['value'] = $phone;
 	node_save($node_customer);
 	$node_customer = NULL;
-	
-	
+
+
 	/*
 	 * 语言为中立
 	 * 客户信息，存在字段中，用冗余免去查询;美食与分量，备注，用body存储;订单号，存在title字段中;总应付款
 	 */
 	$node_order = new stdClass();
 	$node_order->type = 'ct_ordering_order';
-	
+
 	$node_order->language = 'und';
 	$node_order->status = 0;
 	$node_order->uid = 1;
@@ -125,24 +153,28 @@ function ct_restaurant_order_form_submit($form, &$form_state) {
 	$node_order->sticky = 0;
 	$node_order->format = 2;
 	//订单号
-	$node_order->title = "201208250001";
+	$node_order->title = generate_order_number();
 	list($order_total_price, $orderinfo) = orderinfo($_COOKIE["order_info"]);
-	$node_order->field_order_customerinfo['und'][0]['value'] = sprintf("%s\r\n%s\r\n%s", $name, $address, $phone); 
-	$node_order->field_order_price['und'][0]['value'] = $order_total_price; 
+	$node_order->field_order_customerinfo['und'][0]['value'] = sprintf("%s\r\n%s\r\n%s", $name, $address, $phone);
+	$node_order->field_order_price['und'][0]['value'] = $order_total_price;
 	$node_order->body['und'][0]['value'] = sprintf("%s\r\n%s\r\n%s", format_date(time(), 'custom', "Y-m-d H:i:s"), $orderinfo, $notes);
 	node_save($node_order);
-	
+
 	$node_order = NULL;
+	drupal_goto(variable_get("ordered_url_redirect", "<front>"));
 }
 
 
 
 function generate_order_number() {
-	$order_number = variable_get("order_number");
-	$foo = substr($order_number, 7, 4);
-}
-
-function get_order_price($orderinfo_in_cookie) {
+	$date = format_date(time(), 'custom', "Ymd");
+	$query = new EntityFieldQuery();
+	$entities = $query->entityCondition('entity_type', 'node')
+		->propertyCondition('type', 'ct_ordering_order')
+		->propertyCondition('status', 0)
+		->propertyCondition('title', "$date%", 'like')
+		->execute();
+	return $date . sprintf('%04d', count($entities['node']) + 1);
 }
 
 function orderinfo($orderinfo_in_cookie) {
@@ -157,4 +189,9 @@ function orderinfo($orderinfo_in_cookie) {
 		$orderinfo .= sprintf("%s%d份(%f元)\r\n", $item_title, $quantity, $item_total_price);
 	}
 	return array($order_total_price, $orderinfo);
+}
+
+function validate_phone($phone) {
+	$regex = "/^13[0-9]{9}|15[0|1|2|3|5|6|7|8|9]\d{8}|18[0|5|6|7|8|9]\d{8}|\d{3}-\d{8}|\d{11}|\d{4}-\d{7}$/";
+	return preg_match($regex, $phone);
 }
