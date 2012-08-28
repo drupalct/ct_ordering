@@ -27,7 +27,7 @@ function restaurant_onfig_form() {
 	return system_settings_form($form);
 }
 function search_customer_by_phone() {
-	if (validate_phone($_REQUEST['phone'])) {
+	if (isset($_REQUEST['phone']) && !empty($_REQUEST['phone']) && validate_phone($_REQUEST['phone'])) {
 		$query = new EntityFieldQuery();
 		$entities = $query->entityCondition('entity_type', 'node')
 		->propertyCondition('type', 'ct_ordering_customer')
