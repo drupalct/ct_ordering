@@ -161,6 +161,7 @@ function ct_restaurant_order_form_submit($form, &$form_state) {
 	node_save($node_order);
 
 	$node_order = NULL;
+	setcookie("order_info", NULL);
 	drupal_goto(variable_get("ordered_url_redirect", "<front>"));
 }
 
