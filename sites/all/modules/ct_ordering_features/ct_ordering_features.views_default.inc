@@ -73,6 +73,15 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'ct_ordering_customer' => 'ct_ordering_customer',
   );
+  /* Filter criterion: Content: 电话 (field_customer_phone) */
+  $handler->display->display_options['filters']['field_customer_phone_value']['id'] = 'field_customer_phone_value';
+  $handler->display->display_options['filters']['field_customer_phone_value']['table'] = 'field_data_field_customer_phone';
+  $handler->display->display_options['filters']['field_customer_phone_value']['field'] = 'field_customer_phone_value';
+  $handler->display->display_options['filters']['field_customer_phone_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['operator_id'] = 'field_customer_phone_value_op';
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['label'] = '电话 (field_customer_phone)';
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['operator'] = 'field_customer_phone_value_op';
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['identifier'] = 'field_customer_phone_value';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -118,6 +127,50 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '操作';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_node]    [delete_node]';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'ct_ordering_customer' => 'ct_ordering_customer',
+  );
+  /* Filter criterion: Content: 电话 (field_customer_phone) */
+  $handler->display->display_options['filters']['field_customer_phone_value']['id'] = 'field_customer_phone_value';
+  $handler->display->display_options['filters']['field_customer_phone_value']['table'] = 'field_data_field_customer_phone';
+  $handler->display->display_options['filters']['field_customer_phone_value']['field'] = 'field_customer_phone_value';
+  $handler->display->display_options['filters']['field_customer_phone_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['operator_id'] = 'field_customer_phone_value_op';
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['label'] = '电话';
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['operator'] = 'field_customer_phone_value_op';
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['identifier'] = 'field_customer_phone_value';
+  $handler->display->display_options['filters']['field_customer_phone_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = '姓名/称谓';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
   $handler->display->display_options['path'] = 'admin/customers';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = '顾客管理';
@@ -142,6 +195,7 @@ function ct_ordering_features_views_default_views() {
     t('电话'),
     t('上次送餐地址'),
     t('备注信息'),
+    t('电话 (field_customer_phone)'),
     t('Page'),
     t('操作'),
     t('[edit_node]    [delete_node]'),
