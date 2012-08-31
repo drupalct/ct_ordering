@@ -19,7 +19,7 @@ function ct_ordering_features_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
       ),
       'display' => array(),
@@ -86,9 +86,7 @@ function ct_ordering_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_ct_ordering_customer';
-  $strongarm->value = array(
-    0 => 'main-menu',
-  );
+  $strongarm->value = array();
   $export['menu_options_ct_ordering_customer'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -148,28 +146,30 @@ function ct_ordering_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_ct_ordering_order';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'status',
+  );
   $export['node_options_ct_ordering_order'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_ct_ordering_customer';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['node_preview_ct_ordering_customer'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_ct_ordering_food';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['node_preview_ct_ordering_food'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_ct_ordering_order';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['node_preview_ct_ordering_order'] = $strongarm;
 
   $strongarm = new stdClass();

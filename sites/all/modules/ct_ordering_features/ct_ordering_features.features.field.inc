@@ -79,7 +79,7 @@ function ct_ordering_features_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '-4',
+        'weight' => '3',
       ),
     ),
   );
@@ -148,7 +148,7 @@ function ct_ordering_features_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '-3',
+        'weight' => '2',
       ),
     ),
   );
@@ -217,7 +217,7 @@ function ct_ordering_features_field_default_fields() {
           'size' => '15',
         ),
         'type' => 'text_textfield',
-        'weight' => '-2',
+        'weight' => '1',
       ),
     ),
   );

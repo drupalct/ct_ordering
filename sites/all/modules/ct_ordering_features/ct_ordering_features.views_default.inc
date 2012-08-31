@@ -22,8 +22,9 @@ function ct_ordering_features_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Customers';
+  $handler->display->display_options['title'] = '客户管理';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = '更多';
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
@@ -31,42 +32,54 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = '应用';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = '重置';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = '排序依据';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = '升序';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = '降序';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = '每页条目数';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- 全部 -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = '偏移量';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« 第一页';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ 前一页';
+  $handler->display->display_options['pager']['options']['tags']['next'] = '下一页 ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '末页 »';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Field: Content: Title */
+  /* 字段: 内容: 标题 */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '姓名/称谓';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: 电话 */
+  /* 字段: 内容: 电话 */
   $handler->display->display_options['fields']['field_customer_phone']['id'] = 'field_customer_phone';
   $handler->display->display_options['fields']['field_customer_phone']['table'] = 'field_data_field_customer_phone';
   $handler->display->display_options['fields']['field_customer_phone']['field'] = 'field_customer_phone';
-  /* Field: Content: 上次送餐地址 */
+  /* 字段: 内容: 上次送餐地址 */
   $handler->display->display_options['fields']['field_customer_address']['id'] = 'field_customer_address';
   $handler->display->display_options['fields']['field_customer_address']['table'] = 'field_data_field_customer_address';
   $handler->display->display_options['fields']['field_customer_address']['field'] = 'field_customer_address';
-  /* Field: Content: Body */
+  /* 字段: 内容: 订单详情 */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '备注信息';
-  /* Sort criterion: Content: Post date */
+  /* 排序标准: 内容: 发布日期 */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: 内容: 已发表 */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: 内容: 类型 */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -78,7 +91,7 @@ function ct_ordering_features_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
+  /* 字段: 内容: 标题 */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -86,34 +99,34 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: 电话 */
+  /* 字段: 内容: 电话 */
   $handler->display->display_options['fields']['field_customer_phone']['id'] = 'field_customer_phone';
   $handler->display->display_options['fields']['field_customer_phone']['table'] = 'field_data_field_customer_phone';
   $handler->display->display_options['fields']['field_customer_phone']['field'] = 'field_customer_phone';
-  /* Field: Content: 上次送餐地址 */
+  /* 字段: 内容: 上次送餐地址 */
   $handler->display->display_options['fields']['field_customer_address']['id'] = 'field_customer_address';
   $handler->display->display_options['fields']['field_customer_address']['table'] = 'field_data_field_customer_address';
   $handler->display->display_options['fields']['field_customer_address']['field'] = 'field_customer_address';
-  /* Field: Content: Body */
+  /* 字段: 内容: 订单详情 */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '备注信息';
-  /* Field: Content: Delete link */
+  /* 字段: 内容: 删除链接 */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = '';
   $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
-  /* Field: Content: Edit link */
+  /* 字段: 内容: 编辑链接 */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = '';
   $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
-  /* Field: Global: Custom text */
+  /* 字段: 全局: 自定义文本 */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
@@ -125,20 +138,20 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'menu-restaurantadmin';
   $translatables['views_of_customers'] = array(
     t('Master'),
-    t('Customers'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('客户管理'),
+    t('更多'),
+    t('应用'),
+    t('重置'),
+    t('排序依据'),
+    t('升序'),
+    t('降序'),
+    t('每页条目数'),
+    t('- 全部 -'),
+    t('偏移量'),
+    t('« 第一页'),
+    t('‹ 前一页'),
+    t('下一页 ›'),
+    t('末页 »'),
     t('姓名/称谓'),
     t('电话'),
     t('上次送餐地址'),
@@ -161,17 +174,34 @@ function ct_ordering_features_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Foods';
+  $handler->display->display_options['title'] = '菜单';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['use_more_text'] = '更多';
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = '应用';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = '重置';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = '排序依据';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = '升序';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = '降序';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '12';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = '每页条目数';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- 全部 -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = '偏移量';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« 第一页';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ 前一页';
+  $handler->display->display_options['pager']['options']['tags']['next'] = '下一页 ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '末页 »';
   $handler->display->display_options['style_plugin'] = 'grid';
+  $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: 图片 */
+  /* 字段: 内容: 图片 */
   $handler->display->display_options['fields']['field_food_image']['id'] = 'field_food_image';
   $handler->display->display_options['fields']['field_food_image']['table'] = 'field_data_field_food_image';
   $handler->display->display_options['fields']['field_food_image']['field'] = 'field_food_image';
@@ -179,10 +209,10 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['field_food_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_food_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_food_image']['settings'] = array(
-    'image_style' => '',
+    'image_style' => 'food_thumbnail',
     'image_link' => '',
   );
-  /* Field: Content: 价格 */
+  /* 字段: 内容: 价格 */
   $handler->display->display_options['fields']['field_food_price']['id'] = 'field_food_price';
   $handler->display->display_options['fields']['field_food_price']['table'] = 'field_data_field_food_price';
   $handler->display->display_options['fields']['field_food_price']['field'] = 'field_food_price';
@@ -196,7 +226,7 @@ function ct_ordering_features_views_default_views() {
     'scale' => '2',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Title */
+  /* 字段: 内容: 标题 */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -205,12 +235,12 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Sort criterion: Content: Post date */
+  /* 排序标准: 内容: 发布日期 */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: 内容: 类型 */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -218,14 +248,14 @@ function ct_ordering_features_views_default_views() {
     'ct_ordering_food' => 'ct_ordering_food',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Title */
+  /* Filter criterion: 内容: 标题 */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'contains';
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['label'] = '标题';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -233,7 +263,7 @@ function ct_ordering_features_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: Content: 分类 (field_food_category) */
+  /* Filter criterion: 内容: 分类 (field_food_category)分类 (field_food_category) */
   $handler->display->display_options['filters']['field_food_category_tid']['id'] = 'field_food_category_tid';
   $handler->display->display_options['filters']['field_food_category_tid']['table'] = 'field_data_field_food_category';
   $handler->display->display_options['filters']['field_food_category_tid']['field'] = 'field_food_category_tid';
@@ -257,7 +287,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: 内容: 类型 */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -272,7 +302,27 @@ function ct_ordering_features_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = '菜单管理';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = '每页条目数';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- 全部 -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = '偏移量';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« 第一页';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ 前一页';
+  $handler->display->display_options['pager']['options']['tags']['next'] = '下一页 ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '末页 »';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -292,7 +342,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
+  /* 字段: 内容: 标题 */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -300,7 +350,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: 图片 */
+  /* 字段: 内容: 图片 */
   $handler->display->display_options['fields']['field_food_image']['id'] = 'field_food_image';
   $handler->display->display_options['fields']['field_food_image']['table'] = 'field_data_field_food_image';
   $handler->display->display_options['fields']['field_food_image']['field'] = 'field_food_image';
@@ -309,7 +359,7 @@ function ct_ordering_features_views_default_views() {
     'image_style' => 'thumbnail',
     'image_link' => 'content',
   );
-  /* Field: Content: 分类 */
+  /* 字段: 内容: 分类 */
   $handler->display->display_options['fields']['field_food_category']['id'] = 'field_food_category';
   $handler->display->display_options['fields']['field_food_category']['table'] = 'field_data_field_food_category';
   $handler->display->display_options['fields']['field_food_category']['field'] = 'field_food_category';
@@ -317,7 +367,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['field_food_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_food_category']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_food_category']['type'] = 'taxonomy_term_reference_plain';
-  /* Field: Content: Body */
+  /* 字段: 内容: 订单详情 */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -329,7 +379,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '60',
   );
-  /* Field: Global: Custom text */
+  /* 字段: 全局: 自定义文本 */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
@@ -337,7 +387,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div>分类：[field_food_category]</div>
 <div>简介：[body]</div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Field: Content: 价格 */
+  /* 字段: 内容: 价格 */
   $handler->display->display_options['fields']['field_food_price']['id'] = 'field_food_price';
   $handler->display->display_options['fields']['field_food_price']['table'] = 'field_data_field_food_price';
   $handler->display->display_options['fields']['field_food_price']['field'] = 'field_food_price';
@@ -347,21 +397,21 @@ function ct_ordering_features_views_default_views() {
     'scale' => '2',
     'prefix_suffix' => 1,
   );
-  /* Field: Content: Edit link */
+  /* 字段: 内容: 编辑链接 */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = '';
   $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
-  /* Field: Content: Delete link */
+  /* 字段: 内容: 删除链接 */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = '';
   $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
-  /* Field: Global: Custom text */
+  /* 字段: 全局: 自定义文本 */
   $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
   $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
@@ -369,7 +419,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '[edit_node]    [delete_node]';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: 内容: 类型 */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -377,7 +427,7 @@ function ct_ordering_features_views_default_views() {
     'ct_ordering_food' => 'ct_ordering_food',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Title */
+  /* Filter criterion: 内容: 标题 */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
@@ -392,7 +442,7 @@ function ct_ordering_features_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: Content: 分类 (field_food_category) */
+  /* Filter criterion: 内容: 分类 (field_food_category)分类 (field_food_category) */
   $handler->display->display_options['filters']['field_food_category_tid']['id'] = 'field_food_category_tid';
   $handler->display->display_options['filters']['field_food_category_tid']['table'] = 'field_data_field_food_category';
   $handler->display->display_options['filters']['field_food_category_tid']['field'] = 'field_food_category_tid';
@@ -401,7 +451,6 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['filters']['field_food_category_tid']['expose']['label'] = '分类';
   $handler->display->display_options['filters']['field_food_category_tid']['expose']['operator'] = 'field_food_category_tid_op';
   $handler->display->display_options['filters']['field_food_category_tid']['expose']['identifier'] = 'field_food_category_tid';
-  $handler->display->display_options['filters']['field_food_category_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_food_category_tid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -418,24 +467,25 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $translatables['views_of_foods'] = array(
     t('Master'),
-    t('Foods'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
+    t('菜单'),
+    t('更多'),
+    t('应用'),
+    t('重置'),
+    t('排序依据'),
+    t('升序'),
+    t('降序'),
+    t('每页条目数'),
+    t('- 全部 -'),
+    t('偏移量'),
+    t('« 第一页'),
+    t('‹ 前一页'),
+    t('下一页 ›'),
+    t('末页 »'),
     t('￥'),
-    t('Title'),
+    t('标题'),
     t('分类'),
     t('Page'),
+    t('菜单管理'),
     t('菜名'),
     t('图片'),
     t('菜品信息'),
@@ -459,34 +509,50 @@ function ct_ordering_features_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Orders';
+  $handler->display->display_options['title'] = '订单管理';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['use_more_text'] = '更多';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = '应用';
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = '重置';
+  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = '排序依据';
+  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = '升序';
+  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = '降序';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = '每页条目数';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- 全部 -';
+  $handler->display->display_options['pager']['options']['expose']['offset_label'] = '偏移量';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '« 第一页';
+  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ 前一页';
+  $handler->display->display_options['pager']['options']['tags']['next'] = '下一页 ›';
+  $handler->display->display_options['pager']['options']['tags']['last'] = '末页 »';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Field: Content: Title */
+  /* 字段: 内容: 标题 */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Post date */
+  /* 排序标准: 内容: 发布日期 */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: 内容: 已发表 */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '0';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: 内容: 类型 */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -498,7 +564,7 @@ function ct_ordering_features_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
+  /* 字段: 内容: 标题 */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
@@ -506,35 +572,35 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: 客户信息 */
+  /* 字段: 内容: 客户信息 */
   $handler->display->display_options['fields']['field_order_customerinfo']['id'] = 'field_order_customerinfo';
   $handler->display->display_options['fields']['field_order_customerinfo']['table'] = 'field_data_field_order_customerinfo';
   $handler->display->display_options['fields']['field_order_customerinfo']['field'] = 'field_order_customerinfo';
   $handler->display->display_options['fields']['field_order_customerinfo']['alter']['nl2br'] = TRUE;
-  /* Field: Content: Body */
+  /* 字段: 内容: 订单详情 */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '订单信息';
-  /* Field: Content: 订单状态 */
+  /* 字段: 内容: 订单状态 */
   $handler->display->display_options['fields']['field_order_status']['id'] = 'field_order_status';
   $handler->display->display_options['fields']['field_order_status']['table'] = 'field_data_field_order_status';
   $handler->display->display_options['fields']['field_order_status']['field'] = 'field_order_status';
-  /* Field: Content: Edit link */
+  /* 字段: 内容: 编辑链接 */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = '';
   $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
-  /* Field: Content: Delete link */
+  /* 字段: 内容: 删除链接 */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['label'] = '';
   $handler->display->display_options['fields']['delete_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
-  /* Field: Global: Custom text */
+  /* 字段: 全局: 自定义文本 */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
@@ -542,14 +608,14 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_node]    [delete_node]';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
+  /* Filter criterion: 内容: 已发表 */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '0';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
+  /* Filter criterion: 内容: 类型 */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -557,7 +623,7 @@ function ct_ordering_features_views_default_views() {
     'ct_ordering_order' => 'ct_ordering_order',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Title */
+  /* Filter criterion: 内容: 标题 */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
@@ -572,7 +638,7 @@ function ct_ordering_features_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: Content: 订单状态 (field_order_status) */
+  /* Filter criterion: 内容: 订单状态 (field_order_status)订单状态 (field_order_status) */
   $handler->display->display_options['filters']['field_order_status_value']['id'] = 'field_order_status_value';
   $handler->display->display_options['filters']['field_order_status_value']['table'] = 'field_data_field_order_status';
   $handler->display->display_options['filters']['field_order_status_value']['field'] = 'field_order_status_value';
@@ -593,7 +659,7 @@ function ct_ordering_features_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: Content: Post date */
+  /* Filter criterion: 内容: 发布日期 */
   $handler->display->display_options['filters']['created']['id'] = 'created';
   $handler->display->display_options['filters']['created']['table'] = 'node';
   $handler->display->display_options['filters']['created']['field'] = 'created';
@@ -608,7 +674,7 @@ function ct_ordering_features_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: Content: 客户信息 (field_order_customerinfo) */
+  /* Filter criterion: 内容: 客户信息 (field_order_customerinfo)客户信息 (field_order_customerinfo) */
   $handler->display->display_options['filters']['field_order_customerinfo_value']['id'] = 'field_order_customerinfo_value';
   $handler->display->display_options['filters']['field_order_customerinfo_value']['table'] = 'field_data_field_order_customerinfo';
   $handler->display->display_options['filters']['field_order_customerinfo_value']['field'] = 'field_order_customerinfo_value';
@@ -631,21 +697,21 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $translatables['views_of_orders'] = array(
     t('Master'),
-    t('Orders'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('Title'),
+    t('订单管理'),
+    t('更多'),
+    t('应用'),
+    t('重置'),
+    t('排序依据'),
+    t('升序'),
+    t('降序'),
+    t('每页条目数'),
+    t('- 全部 -'),
+    t('偏移量'),
+    t('« 第一页'),
+    t('‹ 前一页'),
+    t('下一页 ›'),
+    t('末页 »'),
+    t('标题'),
     t('Page'),
     t('订单号'),
     t('客户信息'),
