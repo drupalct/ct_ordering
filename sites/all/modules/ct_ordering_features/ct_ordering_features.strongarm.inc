@@ -86,7 +86,9 @@ function ct_ordering_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_ct_ordering_customer';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
   $export['menu_options_ct_ordering_customer'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -153,21 +155,21 @@ function ct_ordering_features_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_ct_ordering_customer';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['node_preview_ct_ordering_customer'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_ct_ordering_food';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['node_preview_ct_ordering_food'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_ct_ordering_order';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['node_preview_ct_ordering_order'] = $strongarm;
 
   $strongarm = new stdClass();
