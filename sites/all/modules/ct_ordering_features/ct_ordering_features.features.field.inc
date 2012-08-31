@@ -360,7 +360,7 @@ function ct_ordering_features_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '3',
+        'weight' => '1',
       ),
     ),
   );
@@ -431,8 +431,8 @@ function ct_ordering_features_field_default_fields() {
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
-        'max_resolution' => '200x180',
-        'min_resolution' => '',
+        'max_resolution' => '640x640',
+        'min_resolution' => '200x200',
         'title_field' => 0,
         'user_register_form' => FALSE,
       ),
@@ -444,7 +444,7 @@ function ct_ordering_features_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -514,7 +514,7 @@ function ct_ordering_features_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );

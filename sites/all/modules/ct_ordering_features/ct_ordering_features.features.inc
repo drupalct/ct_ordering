@@ -22,12 +22,43 @@ function ct_ordering_features_views_api() {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function ct_ordering_features_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: food_thumbnail.
+  $styles['food_thumbnail'] = array(
+    'name' => 'food_thumbnail',
+    'effects' => array(
+      1 => array(
+        'label' => '比例缩放并裁切',
+        'help' => '比例缩放将会保持原始图片的宽高比，然后裁切最大边。这通常对创建不拉伸的完美的方形缩略图是最有用的。',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'dimensions callback' => 'image_resize_dimensions',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => '200',
+          'height' => '140',
+        ),
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function ct_ordering_features_node_info() {
   $items = array(
     'ct_ordering_customer' => array(
-      'name' => t('CT Ordering Customer'),
+      'name' => t('客户信息'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
@@ -35,7 +66,7 @@ function ct_ordering_features_node_info() {
       'help' => '',
     ),
     'ct_ordering_food' => array(
-      'name' => t('CT Ordering Food'),
+      'name' => t('菜单信息'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
@@ -43,7 +74,7 @@ function ct_ordering_features_node_info() {
       'help' => '',
     ),
     'ct_ordering_order' => array(
-      'name' => t('CT Ordering Order'),
+      'name' => t('订单信息'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',
