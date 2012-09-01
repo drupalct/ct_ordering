@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Add js file via drupal_add_js().
+ */
+
+/**
+ * Implements hook_init().
+ */
+function ct_ordering_cart_init() {
+  $path = drupal_get_path('module', 'ct_ordering_cart');
+  drupal_add_js($path . '/ct_ordering_cart.js');
+  drupal_add_css($path . '/ct_ordering_cart.css');
+}

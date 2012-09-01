@@ -1,0 +1,4 @@
+name = CT Ordering Shopping Cart
+description = "Use jQuery to implement shopping cart."
+package = CT Ordering
+core = 7.x

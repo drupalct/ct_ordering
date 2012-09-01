@@ -285,6 +285,50 @@ function ct_ordering_features_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* 字段: 内容: 图片 */
+  $handler->display->display_options['fields']['field_food_image']['id'] = 'field_food_image';
+  $handler->display->display_options['fields']['field_food_image']['table'] = 'field_data_field_food_image';
+  $handler->display->display_options['fields']['field_food_image']['field'] = 'field_food_image';
+  $handler->display->display_options['fields']['field_food_image']['label'] = '';
+  $handler->display->display_options['fields']['field_food_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_food_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_food_image']['settings'] = array(
+    'image_style' => 'food_thumbnail',
+    'image_link' => '',
+  );
+  /* 字段: 内容: 价格 */
+  $handler->display->display_options['fields']['field_food_price']['id'] = 'field_food_price';
+  $handler->display->display_options['fields']['field_food_price']['table'] = 'field_data_field_food_price';
+  $handler->display->display_options['fields']['field_food_price']['field'] = 'field_food_price';
+  $handler->display->display_options['fields']['field_food_price']['label'] = '￥';
+  $handler->display->display_options['fields']['field_food_price']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_food_price']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['field_food_price']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_food_price']['settings'] = array(
+    'thousand_separator' => ' ',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  /* 字段: 内容: 标题 */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* 字段: 内容: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['text'] = '<div><span class="num-minus">-</span><span class="food-order" fid="[nid]" f_price="[field_food_price]" f_name="[title]">1</span><span class="num-plus">+</span></div>
+<div class="add-to-cart">加入订单</div>';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: 内容: 类型 */
@@ -485,6 +529,8 @@ function ct_ordering_features_views_default_views() {
     t('标题'),
     t('分类'),
     t('Page'),
+    t('<div><span class="num-minus">-</span><span class="food-order" fid="[nid]" f_price="[field_food_price]" f_name="[title]">1</span><span class="num-plus">+</span></div>
+<div class="add-to-cart">加入订单</div>'),
     t('菜单管理'),
     t('菜名'),
     t('图片'),

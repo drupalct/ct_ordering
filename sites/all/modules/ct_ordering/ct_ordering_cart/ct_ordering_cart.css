@@ -1,0 +1,19 @@
+
+/**
+ * @file
+ * The base style of shopping cart.
+ */
+ 
+.num-minus,
+.num-plus {
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  width: 20px;
+}
+
+.add-to-cart {
+  cursor: pointer;
+}
