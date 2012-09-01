@@ -10,7 +10,7 @@
     return num;
   }
   $(function () {
-    $('.view-views-of-foods .views-field-nid .num-plus').click(function () {
+    $('.num-plus').click(function () {
       $food_order = $(this).siblings('.food-order');
       $num = $food_order.html();
       $num = num_add($num);

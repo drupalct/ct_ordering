@@ -26,11 +26,17 @@ function ct_ordering_features_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'ct_ordering_cart-info' => array(
+          'module' => 'ct_ordering_cart',
+          'delta' => 'info',
+          'region' => 'sidebar_second',
+          'weight' => '-10',
+        ),
         'ct_restaurant-ct_restaurant_order_form' => array(
           'module' => 'ct_restaurant',
           'delta' => 'ct_restaurant_order_form',
           'region' => 'sidebar_second',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),

@@ -7,6 +7,7 @@ project = ct_ordering_features
 dependencies[] = acl
 dependencies[] = content_access
 dependencies[] = context
+dependencies[] = ct_ordering_cart
 dependencies[] = ct_restaurant
 dependencies[] = ctools
 dependencies[] = features

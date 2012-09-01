@@ -11,5 +11,31 @@
 function ct_ordering_cart_init() {
   $path = drupal_get_path('module', 'ct_ordering_cart');
   drupal_add_js($path . '/ct_ordering_cart.js');
+  drupal_add_js($path . '/jQuery.cookie.js');
   drupal_add_css($path . '/ct_ordering_cart.css');
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ct_ordering_cart_block_info() {
+  $blocks['info'] = array(
+    'info' => '购物车信息区块',
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view($delta = '').
+ */
+function ct_ordering_cart_block_view($delta = '') {
+  $block = array();
+  
+  switch ($delta) {
+    case 'info':
+      $block['subject'] = '您的菜单';
+      $block['content'] = '您还没有下单';
+      break;
+  }
+  return $block;
 }
