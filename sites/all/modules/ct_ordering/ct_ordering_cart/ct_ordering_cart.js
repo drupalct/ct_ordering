@@ -42,12 +42,22 @@
   function RefreshShoppingCart(id, name, num, price) {
     var cookieSet = { expires: 7, path: '/'};
     var jsonObj = eval('(' + $.cookie('cookieFoodID') + ')'); //将json字符串转换成数组
-    var findFood = false;
     for (var food in jsonObj) {
       if (jsonObj[food].FoodID == id) {
         jsonObj[food].Name = name;
         jsonObj[food].Num = num;
         jsonObj[food].Price = price;
+      }
+    $.cookie('cookieFoodID', JSON.stringify(jsonObj), cookieSet); //需要json2.js支持
+    }
+  }
+  
+  function RemoveFood(id) {
+    var cookieSet = { expires: 7, path: '/'};
+    var jsonObj = eval('(' + $.cookie('cookieFoodID') + ')'); //将json字符串转换成数组
+    for (var food in jsonObj) {
+      if (jsonObj[food].FoodID == id) {
+        jsonObj.splice(food);
       }
     $.cookie('cookieFoodID', JSON.stringify(jsonObj), cookieSet); //需要json2.js支持
     }
@@ -60,7 +70,8 @@
       for (var food in jsonObj) {
         $foods += '<div class="food-item"><span class="food-name" fid="' + jsonObj[food].FoodID + '" price="' + jsonObj[food].Price + '">' + jsonObj[food].Name + '</span>';
         $foods += '<span class="num-minus">-</span><span class="food-order">' + jsonObj[food].Num + '</span><span class="num-plus">+</span>';
-        $foods += '<span class="food-price">' + jsonObj[food].Price * jsonObj[food].Num + '</span></div>';
+        $foods += '<span class="food-price">' + jsonObj[food].Price * jsonObj[food].Num + '</span>';
+        $foods += '<span class="food-remove">删除</span></div>';
       }
       $('#block-ct-ordering-cart-info .content').html($foods);
     }
@@ -95,6 +106,12 @@
       $price = $(this).siblings('.food-name').attr('price');
       RefreshShoppingCart($id, $name, $num, $price);
       $(this).siblings('.food-price').html($price * $num);
+    });
+    
+    $('.food-remove').live('click', function () {
+      $id = $(this).siblings('.food-name').attr('fid');
+      RemoveFood($id);
+      $(this).parent().remove();
     });
     
     $('.add-to-cart').click(function () {
