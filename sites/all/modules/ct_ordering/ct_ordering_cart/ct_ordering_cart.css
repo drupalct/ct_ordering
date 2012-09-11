@@ -35,11 +35,17 @@
 .food-item .food-name {
   width: 100px;
   display: inline-block;
+  overflow: hidden;
 }
 
 .food-item .food-remove {
   display: inline-block;
   cursor: pointer;
+  border: 1px solid #666;
+  border-radius: 5px;
+  background: #fff;
+  padding: 0 5px;
+  margin-top: 5px;
 }
 
 .view-views-of-foods .views-field-nid {
@@ -49,6 +55,8 @@
 
 .view-views-of-foods .views-field-title {
   margin-top: 6px;
+  width: 90px;
+  overflow: hidden;
 }
 
 .add-to-cart {
