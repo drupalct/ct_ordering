@@ -70,7 +70,7 @@
       for (var food in jsonObj) {
         $foods += '<div class="food-item"><span class="food-name" fid="' + jsonObj[food].FoodID + '" price="' + jsonObj[food].Price + '">' + jsonObj[food].Name + '</span>';
         $foods += '<span class="num-minus">-</span><span class="food-order">' + jsonObj[food].Num + '</span><span class="num-plus">+</span>';
-        $foods += '<span class="food-price">' + jsonObj[food].Price * jsonObj[food].Num + '</span>';
+        $foods += '<span class="food-price">￥ ' + jsonObj[food].Price * jsonObj[food].Num + '</span>';
         $foods += '<span class="food-remove">删除</span></div>';
       }
       $('#block-ct-ordering-cart-info .content').html($foods);

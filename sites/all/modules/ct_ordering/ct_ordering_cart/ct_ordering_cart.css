@@ -6,6 +6,9 @@
  
 .num-minus,
 .num-plus {
+  background: #fff;
+  border: 1px solid #666;
+  border-radius: 10px;
   cursor: pointer;
   display: inline-block;
   height: 20px;
@@ -14,6 +17,27 @@
   width: 20px;
 }
 
+.food-order {
+  padding: 0 5px;
+}
+
 .add-to-cart {
+  cursor: pointer;
+}
+
+#edit-name,
+#edit-phone,
+#edit-address {
+  width: 100%;
+}
+
+.food-item .food-price,
+.food-item .food-name {
+  width: 100px;
+  display: inline-block;
+}
+
+.food-item .food-remove {
+  display: inline-block;
   cursor: pointer;
 }
