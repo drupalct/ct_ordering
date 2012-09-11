@@ -41,3 +41,20 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.view-views-of-foods .views-field-nid {
+  float: right;
+  margin: -45px 20px 0 0;
+}
+
+.view-views-of-foods .views-field-title {
+  margin-top: 6px;
+}
+
+.add-to-cart {
+  border: 1px solid #666;
+  border-radius: 5px;
+  background: #fff;
+  padding: 0 10px;
+  margin: 5px 0 0 -5px;
+}
