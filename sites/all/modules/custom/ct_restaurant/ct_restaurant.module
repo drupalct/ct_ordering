@@ -138,6 +138,7 @@ function ct_restaurant_order_form_submit($form, &$form_state) {
   $node_customer->field_customer_address['und'][0]['value'] = $address;
   $node_customer->body['und'][0]['value'] = $notes;
   $node_customer->field_customer_phone['und'][0]['value'] = $phone;
+  $node_customer->status = 1;
   node_save($node_customer);
   $node_customer = NULL;
 
@@ -161,36 +162,31 @@ function ct_restaurant_order_form_submit($form, &$form_state) {
   $node_order->field_order_customerinfo['und'][0]['value'] = sprintf("%s\r\n%s\r\n%s", $name, $address, $phone);
   $node_order->field_order_price['und'][0]['value'] = $order_total_price;
   $node_order->body['und'][0]['value'] = sprintf("%s\r\n%s\r\n%s", format_date(time(), 'custom', "Y-m-d H:i:s"), $orderinfo, $notes);
+  $node_order->status = 1;
   node_save($node_order);
 
   $node_order = NULL;
-  setcookie("order_info", NULL);
+  setcookie("order_info", NULL, mktime()-3600, "/");
   drupal_goto(variable_get("ordered_url_redirect", "<front>"));
 }
 
 
 
 function ct_restaurant_generate_order_number() {
-  $date = format_date(time(), 'custom', "Ymd");
-  $query = new EntityFieldQuery();
-  $entities = $query->entityCondition('entity_type', 'node')
-  ->propertyCondition('type', 'ct_ordering_order')
-  ->propertyCondition('status', 0)
-  ->propertyCondition('title', "$date%", 'like')
-  ->execute();
-  return $date . sprintf('%04d', count($entities['node']) + 1);
+  return date('YmdHis', time());
 }
 
 function ct_restaurant_orderinfo($orderinfo_in_cookie) {
   $orderinfo = ""; $order_total_price="0.0";
-  $order_item_quantity_arr = explode(";", $orderinfo_in_cookie);
+  $order_item_quantity_arr = drupal_json_decode($orderinfo_in_cookie);
   foreach ($order_item_quantity_arr as $value) {
-    list($item_id, $quantity) = explode("x", $value);
+    $item_id = $value['FoodID'];
+    $quantity = $value['Num'];
     $item_node = node_load($item_id);
     $item_title = $item_node->title;
     $item_total_price = $item_node->field_food_price['und'][0]['value'] * $quantity;
     $order_total_price += $item_total_price;
-    $orderinfo .= sprintf("%s%d份(%f元)\r\n", $item_title, $quantity, $item_total_price);
+    $orderinfo .= sprintf("%s%d份(%.2f元)\r\n", $item_title, $quantity, $item_total_price);
   }
   return array($order_total_price, $orderinfo);
 }
