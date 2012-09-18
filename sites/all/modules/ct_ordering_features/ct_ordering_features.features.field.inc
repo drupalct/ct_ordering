@@ -588,7 +588,7 @@ function ct_ordering_features_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '-4',
+        'weight' => '4',
       ),
     ),
   );
@@ -616,11 +616,9 @@ function ct_ordering_features_field_default_fields() {
       ),
       'locked' => '0',
       'module' => 'text',
-      'settings' => array(
-        'max_length' => '255',
-      ),
+      'settings' => array(),
       'translatable' => '0',
-      'type' => 'text',
+      'type' => 'text_long',
     ),
     'field_instance' => array(
       'bundle' => 'ct_ordering_order',
@@ -633,7 +631,7 @@ function ct_ordering_features_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 1,
+          'weight' => 4,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -644,7 +642,7 @@ function ct_ordering_features_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_order_customerinfo',
-      'label' => '客户信息',
+      'label' => '顾客信息',
       'required' => 0,
       'settings' => array(
         'text_processing' => '0',
@@ -654,10 +652,10 @@ function ct_ordering_features_field_default_fields() {
         'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'size' => '60',
+          'rows' => '4',
         ),
-        'type' => 'text_textfield',
-        'weight' => '-3',
+        'type' => 'text_textarea',
+        'weight' => '3',
       ),
     ),
   );
@@ -720,7 +718,7 @@ function ct_ordering_features_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '-1',
+        'weight' => '2',
       ),
     ),
   );
@@ -789,7 +787,7 @@ function ct_ordering_features_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '-2',
+        'weight' => '1',
       ),
     ),
   );
@@ -801,11 +799,11 @@ function ct_ordering_features_field_default_fields() {
   t('分类');
   t('图片');
   t('备注');
-  t('客户信息');
   t('电话');
   t('简介');
   t('订单状态');
   t('订单详情');
+  t('顾客信息');
 
   return $fields;
 }

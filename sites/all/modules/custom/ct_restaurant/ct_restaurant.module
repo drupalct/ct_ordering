@@ -104,6 +104,7 @@ function ct_restaurant_order_form($form, &$form_state) {
   return $form;
 }
 
+
 function ct_restaurant_order_form_validate($form, &$form_state) {
   if (!isset($_COOKIE["order_info"]) && empty($_COOKIE["order_info"])) {
 
@@ -113,6 +114,8 @@ function ct_restaurant_order_form_validate($form, &$form_state) {
     form_set_error('phone', t('似乎不是正确的电话号码。。。'));
   }
 }
+
+
 function ct_restaurant_order_form_submit($form, &$form_state) {
   //订单相关
   $notes = $form_state['values']['notes'];
@@ -176,9 +179,12 @@ function ct_restaurant_generate_order_number() {
   return date('YmdHis', time());
 }
 
+
 function ct_restaurant_orderinfo($orderinfo_in_cookie) {
+
   $orderinfo = ""; $order_total_price="0.0";
   $order_item_quantity_arr = drupal_json_decode($orderinfo_in_cookie);
+  
   foreach ($order_item_quantity_arr as $value) {
     $item_id = $value['FoodID'];
     $quantity = $value['Num'];
@@ -188,7 +194,9 @@ function ct_restaurant_orderinfo($orderinfo_in_cookie) {
     $order_total_price += $item_total_price;
     $orderinfo .= sprintf("%s%d份(%.2f元)\r\n", $item_title, $quantity, $item_total_price);
   }
+  
   return array($order_total_price, $orderinfo);
+  
 }
 
 function ct_restaurant_validate_phone($phone) {

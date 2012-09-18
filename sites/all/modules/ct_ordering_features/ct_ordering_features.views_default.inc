@@ -618,7 +618,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* 字段: 内容: 客户信息 */
+  /* 字段: 内容: 顾客信息 */
   $handler->display->display_options['fields']['field_order_customerinfo']['id'] = 'field_order_customerinfo';
   $handler->display->display_options['fields']['field_order_customerinfo']['table'] = 'field_data_field_order_customerinfo';
   $handler->display->display_options['fields']['field_order_customerinfo']['field'] = 'field_order_customerinfo';
@@ -658,7 +658,7 @@ function ct_ordering_features_views_default_views() {
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: 内容: 类型 */
@@ -720,7 +720,7 @@ function ct_ordering_features_views_default_views() {
     1 => 0,
     3 => 0,
   );
-  /* Filter criterion: 内容: 客户信息 (field_order_customerinfo)客户信息 (field_order_customerinfo) */
+  /* Filter criterion: 内容: 顾客信息 (field_order_customerinfo)顾客信息 (field_order_customerinfo) */
   $handler->display->display_options['filters']['field_order_customerinfo_value']['id'] = 'field_order_customerinfo_value';
   $handler->display->display_options['filters']['field_order_customerinfo_value']['table'] = 'field_data_field_order_customerinfo';
   $handler->display->display_options['filters']['field_order_customerinfo_value']['field'] = 'field_order_customerinfo_value';
@@ -760,12 +760,13 @@ function ct_ordering_features_views_default_views() {
     t('标题'),
     t('Page'),
     t('订单号'),
-    t('客户信息'),
+    t('顾客信息'),
     t('订单信息'),
     t('订单状态'),
     t('操作'),
     t('[edit_node]    [delete_node]'),
     t('订餐时间'),
+    t('客户信息'),
   );
   $export['views_of_orders'] = $view;
 
